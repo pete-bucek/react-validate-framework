@@ -9,7 +9,7 @@ A lightweight and extensible React validation component
 
 [中文 README](README-zh_CN.md)
 
-Demo: [https://minjieliu.github.io/react-validate-framework](https://minjieliu.github.io/react-validate-framework)
+Demo: [https://pete-bucek.github.io/react-validate-framework](https://pete-bucek.github.io/react-validate-framework)
 
 You can check out the code to see examples.
 
