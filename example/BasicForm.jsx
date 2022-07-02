@@ -9,9 +9,8 @@ import formConnect, {
   Textarea,
   Message,
 } from '../src';
-import './App.scss'; 
-import App from './App'; 
-//import ChildForm from './ChildForm';
+import './BasicForm.scss';
+import ChildForm from './ChildForm';
 
 // Rules and messages
 const schemas = {
@@ -79,92 +78,169 @@ const methods = {
 
 class BasicForm extends Component {
 
-  state = {
-    formValues: {
-      sex: '1', // default
-    },
-    isAllValid: undefined,
+  static propTypes = {
+    formControl: PropTypes.object,
   };
 
-  // Validate the BasicForm
-  handleValidateBasicForm = async () => {
-    const isAllValid = await this.basicForm.validate();
-    this.setState({
-      isAllValid,
-    });
-  };
-
-  // Change the form value
-  handleChangeBasicForm = () => {
-    this.setState({
-      formValues: {
-        ...this.state.formValues,
-        email: 'example@example.com',
-        phone: '133333333333',
-        hobby: ['1', '2'],
-      },
-    });
+  handleSubmitClick = () => {
+    // @return {Promise}
+    this.props.formControl.validate();
   };
 
   render() {
+    const {
+      formControl: {
+        isAllValid,
+        formValues,
+        removeSchemas,
+      },
+    } = this.props;
+
     return (
-      <div className="app">
-        <div className="jumbotron">
-          <div className="container">
-            <h1 className="title">react-validate-framework</h1>
-            <h2 className="title">A lightweight and extensible React validation component</h2>
-            <h3>
-              <iframe
-                src="https://ghbtns.com/github-btn.html?user=MinJieLiu&repo=react-validate-framework&type=star&count=true&size=large"
-                frameBorder="0"
-                scrolling="0"
-                width="160px"
-                height="30px"
-              />
-            </h3>
-            <a href="https://github.com/MinJieLiu/react-validate-framework">
-              <img
-                className="fork-me"
-                src="https://camo.githubusercontent.com/365986a132ccd6a44c23a9169022c0b5c890c387/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f7265645f6161303030302e706e67"
-                alt="Fork me on GitHub"
-                data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png"
-              />
-            </a>
-          </div>
+      <div className="container">
+        <h3>BasicForm</h3>
+        <div className="form-group">
+          <label htmlFor="email">Email:</label>
+          <Text
+            className="email"
+            id="email"
+            name="email"
+            type="email"
+            placeholder="Please input your email"
+            delay={200}
+          />
+          <Message className="valid-error-message" name="email" />
         </div>
-        <div className="container">
-          <h2>App component</h2>
-          <button
-            className="btn btn-info"
-            onClick={this.handleValidateBasicForm}
-          >
-            Validate BasicForm
-          </button>
+        <div className="form-group">
           <button
             className="btn btn-default"
-            onClick={this.handleChangeBasicForm}
+            type="button"
+            onClick={() => {
+              removeSchemas('email');
+            }}
           >
-            Change the sub component form value
+            Do not validate the email
           </button>
-          <div className="well-sm">
-            <p>StatusďĽš{String(this.state.isAllValid)} ďĽundefined | true | falseďĽ‰</p>
-            <p>Basic Form valuesďĽš{JSON.stringify(this.state.formValues)}</p>
-          </div>
         </div>
-        <BasicForm
-          ref={(ref) => {
-            this.basicForm = ref;
-          }}
-          classNames={{
-            static: 'form-control',
-            success: 'valid-success',
-            error: 'valid-error',
-          }}
-          values={this.state.formValues}
+        <div className="form-group">
+          <label htmlFor="phone">Phone:</label>
+          <Text
+            id="phone"
+            name="phone"
+            placeholder="Please enter phone number"
+          />
+          <Message className="valid-error-message" name="phone" />
+        </div>
+        <div className="form-group">
+          <label htmlFor="birthday">Birthday:</label>
+          <Text
+            id="birthday"
+            name="birthday"
+            placeholder="Please fill in your birthday"
+          />
+          <Message className="valid-error-message" name="birthday" />
+        </div>
+        <div className="form-group">
+          <label htmlFor="male">Sex:</label>
+          <div className="radio">
+            <label htmlFor="male">
+              <Radio
+                id="male"
+                name="sex"
+                value="1"
+              />
+              male
+            </label>
+            <label htmlFor="female">
+              <Radio
+                id="female"
+                name="sex"
+                value="2"
+              />
+              female
+            </label>
+          </div>
+          <Message className="valid-error-message" name="sex" />
+        </div>
+        <div className="form-group">
+          <label htmlFor="city">City:</label>
+          <Select
+            id="city"
+            name="city"
+          >
+            <option value="">Please choose</option>
+            <option value="0">beijing</option>
+            <option value="1">shanghai</option>
+            <option value="2">new York</option>
+          </Select>
+          <Message className="valid-error-message" name="city" />
+        </div>
+        <div className="form-group">
+          <label htmlFor="hobby">Hobby:</label>
+          <div className="checkbox">
+            <label htmlFor="hobby1">
+              <Checkbox
+                id="hobby1"
+                name="hobby"
+                value="1"
+              />
+              hobby1
+            </label>
+            <label htmlFor="hobby2">
+              <Checkbox
+                id="hobby2"
+                name="hobby"
+                value="2"
+              />
+              hobby2
+            </label>
+            <label htmlFor="hobby3">
+              <Checkbox
+                id="hobby3"
+                name="hobby"
+                value="3"
+              />
+              hobby3
+            </label>
+            <label htmlFor="hobby4">
+              <Checkbox
+                id="hobby4"
+                name="hobby"
+                value="4"
+              />
+              hobby4
+            </label>
+          </div>
+          <Message className="valid-error-message" name="hobby" />
+        </div>
+        <div className="form-group">
+          <label htmlFor="remarks">Introduction:</label>
+          <Textarea
+            id="remarks"
+            name="remarks"
+            rows="3"
+            placeholder="Describe yourself"
+          />
+          <Message className="valid-error-message" name="remarks" />
+        </div>
+        <ChildForm {...this.props} />
+        <input
+          className={classNames('btn', {
+            'btn-primary': !isAllValid,
+            'btn-success': isAllValid,
+          })}
+          id="submit"
+          type="button"
+          onClick={this.handleSubmitClick}
+          value={isAllValid ? 'Success' : 'Commit'}
         />
+        <div className="well-sm">
+          <p>Form Values:</p>
+          {JSON.stringify(formValues)}
+        </div>
       </div>
     );
-  } 
+  }
 }
 
-export default formConnect(schemas, methods)(BasicForm);
+export default formConnect(schemas, methods)(BasicForm); 
