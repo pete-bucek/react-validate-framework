@@ -9,7 +9,8 @@ import formConnect, {
   Textarea,
   Message,
 } from '../src';
-import './BasicForm.scss';
+import './App.scss'; 
+import App from './App'; 
 import ChildForm from './ChildForm';
 
 // Rules and messages
