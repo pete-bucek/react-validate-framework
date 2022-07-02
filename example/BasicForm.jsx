@@ -11,7 +11,7 @@ import formConnect, {
 } from '../src';
 import './App.scss'; 
 import App from './App'; 
-import ChildForm from './ChildForm';
+//import ChildForm from './ChildForm';
 
 // Rules and messages
 const schemas = {
