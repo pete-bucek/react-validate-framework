@@ -202,11 +202,11 @@ class BasicForm extends Component {
               />
               hobby3
             </label>
-            <label htmlFor="hobby4">
+            <label htmlFor="hobby5">
               <Checkbox
-                id="hobby4"
+                id="hobby5"
                 name="hobby"
-                value="4"
+                value="5"
               />
               hobby5
             </label>
