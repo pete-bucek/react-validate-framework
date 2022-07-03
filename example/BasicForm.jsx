@@ -208,7 +208,7 @@ class BasicForm extends Component {
                 name="hobby"
                 value="4"
               />
-              hobby4
+              hobby5
             </label>
           </div>
           <Message className="valid-error-message" name="hobby" />
